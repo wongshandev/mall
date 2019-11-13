@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -110,9 +111,14 @@ public class OmsOrderController {
         }
         return CommonResult.failed();
     }
+
     @PostMapping("generateOrder")
-    @ResponseBody
-    public CommonResult generateOrder( OmsCartItem cartItem){
-        return orderService.generateOrder(cartItem);
+    public ModelAndView generateOrder(OmsCartItem cartItem){
+        String uri = "redirect:/product/details/"+cartItem.getProductId();
+        CommonResult commonResult = orderService.generateOrder(cartItem);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(uri);
+        mv.addObject("msg",commonResult.getMessage());
+        return mv;
     }
 }

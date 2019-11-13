@@ -15,9 +15,9 @@ spring:
 
 #本地文件存储配置
 files:
-  host:  http://39.107.38.88:8080/mall # 图片请求地址
+  host:  http://39.107.38.88:8080/mall-admin # 图片请求地址
   path:  static # 文件保存路径
-  absolutePath: /arlin/tomcat-9.0.27/webapps/mall/WEB-INF/classes/static/ #文件保存的绝对路径
+  absolutePath: /arlin/tomcat-9.0.27/webapps/mall-admin/WEB-INF/classes/static/ #文件保存的绝对路径
   images:
     prefix: images # 上传图片路径前缀
 logging:
