@@ -43,6 +43,9 @@ public class OmsOrderServiceImpl implements OmsOrderService {
     public List<OmsOrder> list(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         return orderDao.getList(queryParam);
+    }@Override
+    public List<OmsOrderDetail> listItems(OmsOrderQueryParam queryParam) {
+        return orderDao.getItemList(queryParam);
     }
 
     @Override

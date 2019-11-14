@@ -18,6 +18,8 @@ public interface OmsOrderService {
      */
     List<OmsOrder> list(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum);
 
+    List<OmsOrderDetail> listItems(OmsOrderQueryParam queryParam);
+
     /**
      * 批量发货
      */

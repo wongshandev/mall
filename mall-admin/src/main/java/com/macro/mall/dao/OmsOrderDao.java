@@ -18,6 +18,8 @@ public interface OmsOrderDao {
      */
     List<OmsOrder> getList(@Param("queryParam") OmsOrderQueryParam queryParam);
 
+    List<OmsOrderDetail> getItemList(@Param("queryParam") OmsOrderQueryParam queryParam);
+
     /**
      * 批量发货
      */
