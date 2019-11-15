@@ -178,6 +178,9 @@ public class OmsOrderServiceImpl implements OmsOrderService {
         orderItem.setProductSkuId(omsCartItem.getProductSkuId());
         orderItem.setProductSkuCode(omsCartItem.getProductSkuCode());
         orderItem.setProductCategoryId(omsCartItem.getProductCategoryId());
+        orderItem.setSp1(omsCartItem.getSp1());
+        orderItem.setSp2(omsCartItem.getSp2());
+
 
         //根据商品合计、运费、活动优惠、优惠券、积分计算应付金额
         OmsOrder order = new OmsOrder();

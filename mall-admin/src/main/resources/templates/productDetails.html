@@ -136,6 +136,7 @@
                         <input name="productId" th:value="${productDetails.id}" hidden/> <!--商品ID-->
                         <input name="productSkuCode" id="productSkuCode" hidden/> <!--商品sku条码-->
                         <input name="productPic" th:value="${productDetails.pic}" hidden/> <!--商品主图-->
+                        <input name="productSn" th:value="${productDetails.productSn}" hidden/> <!--商品货号-->
                         <input name="sp1" id="sp1" hidden/>
                         <input name="sp2" id="sp2" hidden/>
                         <input name="price" id="price" hidden/>
@@ -348,7 +349,7 @@
         var data = obj.getAttribute("data");
         var split = data.split(",");
 
-        var productAttr = "[{'key':'颜色','value':'" + split[2] + "'},{'key':'容量','value':'" + split[3] + "'}]";
+        var productAttr = "[{\"key\":\"颜色\",\"value\":\"" + split[2] + "\"},{\"key\":\"容量\",\"value\":\"" + split[3] + "\"}]";
         var price = split[4];
         var quantity = $("#quantity").val();
         $("#productSkuId").val(split[0]);

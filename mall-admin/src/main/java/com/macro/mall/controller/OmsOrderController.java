@@ -5,9 +5,7 @@ import com.macro.mall.common.api.CommonResult;
 import com.macro.mall.dto.*;
 import com.macro.mall.model.OmsCartItem;
 import com.macro.mall.model.OmsOrder;
-import com.macro.mall.model.OmsOrderItem;
 import com.macro.mall.service.OmsOrderService;
-import com.macro.mall.util.FileUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -128,58 +123,12 @@ public class OmsOrderController {
         return mv;
     }
 
+    @ApiOperation("导出订单")
     @PostMapping("/export")
-    public void exportOrders(HttpServletResponse response,OmsOrderQueryParam queryParam) {
-
-        //查询导入失败数据
+    @ResponseBody
+    public CommonResult<CommonPage<OmsOrderDetail>> exportOrders(OmsOrderQueryParam queryParam) {
         List<OmsOrderDetail> orderList = orderService.listItems(queryParam);
-        // 设置excel第一行的标题
-        String[] titleRow = new String[]{
-                "订单编号"
-                , "下单时间"
-                , "支付总额"
-                , "支付方式"
-                , "订单状态"
-                , "收货人姓名"
-                , "收货人电话"
-                , "收货人邮编"
-                , "收货人地址"
-                , "购买商品ID"
-                , "购买商品名称"
-                , "购买数量"
-        };
-        ArrayList<HashMap<String, Object>> excelList = new ArrayList<>();
-        //获取导入到excel中数据
-       /* for (HashMap<String, Object> map : list) {
-            HashMap<String, Object> data = (HashMap<String, Object>) map.get("data");
-            excelList.add(data);
-        }*/
-        HashMap<String, Object> data = new HashMap<>();
-        data.put("1","1");
-        data.put("2","2");
-        data.put("3","3");
-        excelList.add(data);
-        try {
-            //生成excel
-            FileUtil.writeExcelByMaps(response, excelList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-
-
-
+        return CommonResult.success(CommonPage.restPage(orderList));
     }
 
-    private String[] excelData(List<OmsOrderItem> orderItemList) {
-        String[] strings = new String[3];
-        for (OmsOrderItem i : orderItemList) {
-            strings[0] += i.getProductId() + ",";
-            strings[1] += i.getProductName() + ",";
-            strings[2] += i.getProductQuantity() + ",";
-        }
-        return strings;
-    }
 }
